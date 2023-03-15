@@ -1,3 +1,11 @@
+<p align="center">
+  <a href="https://calculadora-de-estagio.vercel.app/" target="_blank">
+    <img src="./public/images/print-example.png" alt="Exemplo da calculadora de recesso">
+  </a>
+</p>
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
