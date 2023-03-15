@@ -2,9 +2,14 @@ import Head from 'next/head'
 import React, { useState } from 'react';
 import { Box, FormControl, FormLabel, Input, InputGroup, InputLeftAddon, Button, Text, Flex} from '@chakra-ui/react';
 
+const hoje = new Date();
+const dataInicialPadrao = new Date(hoje.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString().substr(0,10); // 30 dias anteriores
+const dataFinalPadrao = hoje.toISOString().substr(0,10); // dia atual
+
+
 export default function Home() {
-  const [inicioEstagio, setInicioEstagio] = useState('');
-  const [fimEstagio, setFimEstagio] = useState('');
+  const [inicioEstagio, setInicioEstagio] = useState(dataInicialPadrao);
+  const [fimEstagio, setFimEstagio] = useState(dataFinalPadrao);
   const [valorBolsa, setValorBolsa] = useState(0);
   const [diasEstagiados, setDiasEstagiados] = useState(0);
   const [diasDeRecesso, setDiasDeRecesso] = useState(0);
