@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React, { useState } from 'react';
-import { Box, FormControl, FormLabel, Input, Button, Text, Flex} from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, Input, InputGroup, InputLeftAddon, Button, Text, Flex} from '@chakra-ui/react';
 
 export default function Home() {
   const [inicioEstagio, setInicioEstagio] = useState('');
@@ -58,11 +58,15 @@ export default function Home() {
           />
         </FormControl>
         <FormControl id="valorBolsa" mb={2}>
+        <FormLabel>Valor da bolsa</FormLabel>
+        <InputGroup>
+          <InputLeftAddon children="R$" />
           <Input
             type="number"
             value={valorBolsa}
             onChange={(e) => setValorBolsa(e.target.value)}
-          />
+            />
+          </InputGroup>
         </FormControl>
         <Button width='full' colorScheme="blue" onClick={calcularDados} mb={2}>
           Calcular
