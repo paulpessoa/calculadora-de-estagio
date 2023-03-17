@@ -1,10 +1,13 @@
 import Head from 'next/head'
 import React, { useState } from 'react';
-import { Box, FormControl, FormLabel, Input, InputGroup, InputLeftAddon, Button, Text, Flex} from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, Input, InputGroup, InputLeftAddon, Button, Text, Flex, Icon } from '@chakra-ui/react';
+
+import { FaShareAlt, FaGithub, FaTwitter } from 'react-icons/fa';
+
 
 const hoje = new Date();
-const dataInicialPadrao = new Date(hoje.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString().substr(0,10); // 30 dias anteriores
-const dataFinalPadrao = hoje.toISOString().substr(0,10); // dia atual
+const dataInicialPadrao = new Date(hoje.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString().substr(0, 10); // 30 dias anteriores
+const dataFinalPadrao = hoje.toISOString().substr(0, 10); // dia atual
 
 
 export default function Home() {
@@ -35,6 +38,19 @@ export default function Home() {
     setPrevisaoBolsaRecesso(valorBolsaRecesso);
   };
 
+
+  const compartilharResultados = () => {
+    // Obtem os dados a serem compartilhados
+    const dadosCompartilhamento = `Dias estagiados: ${diasEstagiados}\nDias de recesso: ${diasDeRecesso}\nPrevisão da bolsa no recesso: R$ ${previsaoBolsaRecesso}`;
+
+    // Cria o link para compartilhamento via WhatsApp
+    const linkCompartilhamento = `https://wa.me/?text=${encodeURIComponent(dadosCompartilhamento)}`;
+
+    // Abre a janela do WhatsApp para compartilhamento
+    window.open(linkCompartilhamento);
+  };
+
+
   return (
     <>
       <Head>
@@ -45,45 +61,59 @@ export default function Home() {
       </Head>
       <Flex height="100vh" justifyContent="center" alignItems="center">
         <Box maxW="sm" borderWidth="1px" borderRadius="lg" p={4}>
-        <Text m={6} fontSize="2xl" fontWeight="bold"> Calculadora de recesso </Text>
-        <FormControl id="inicioEstagio" mb={2}>
-          <FormLabel>Início do estágio</FormLabel>
-          <Input
-            type="date"
-            value={inicioEstagio}
-            onChange={(e) => setInicioEstagio(e.target.value)}
-          />
-        </FormControl>
-        <FormControl id="fimEstagio" mb={2}>
-          <FormLabel>Fim do estágio</FormLabel>
-          <Input
-            type="date"
-            value={fimEstagio}
-            onChange={(e) => setFimEstagio(e.target.value)}
-          />
-        </FormControl>
-        <FormControl id="valorBolsa" mb={2}>
-        <FormLabel>Valor da bolsa</FormLabel>
-        <InputGroup>
-          <InputLeftAddon children="R$" />
-          <Input
-            type="number"
-            value={valorBolsa}
-            onChange={(e) => setValorBolsa(e.target.value)}
+          <Text m={6} fontSize="2xl" fontWeight="bold"> Calculadora de recesso </Text>
+          <FormControl id="inicioEstagio" mb={2}>
+            <FormLabel>Início do estágio</FormLabel>
+            <Input
+              type="date"
+              value={inicioEstagio}
+              onChange={(e) => setInicioEstagio(e.target.value)}
             />
-          </InputGroup>
-        </FormControl>
-        <Button width='full' colorScheme="blue" onClick={calcularDados} mb={2}>
-          Calcular
-        </Button>
+          </FormControl>
+          <FormControl id="fimEstagio" mb={2}>
+            <FormLabel>Fim do estágio</FormLabel>
+            <Input
+              type="date"
+              value={fimEstagio}
+              onChange={(e) => setFimEstagio(e.target.value)}
+            />
+          </FormControl>
+          <FormControl id="valorBolsa" mb={2}>
+            <FormLabel>Valor da bolsa</FormLabel>
+            <InputGroup>
+              <InputLeftAddon children="R$" />
+              <Input
+                type="number"
+                value={valorBolsa}
+                onChange={(e) => setValorBolsa(e.target.value)}
+              />
+            </InputGroup>
+          </FormControl>
+          <Button width='full' colorScheme="blue" onClick={calcularDados} mb={2}>
+            Calcular
+          </Button>
 
-      <Box mt={2} maxW="sm" borderWidth="1px" borderRadius="lg" p={4}>
-        <Text mb={2}>Dias estagiados: {diasEstagiados}</Text>
-        <Text mb={2}>Dias de recesso: {diasDeRecesso}</Text>
-        <Text mb={2}>
-          Previsão da bolsa no recesso: R$ {previsaoBolsaRecesso}
-        </Text>
-        </Box>
+          <Box mt={2} maxW="sm" borderWidth="1px" borderRadius="lg" p={4}>
+            <Text mb={2}>Dias estagiados: {diasEstagiados}</Text>
+            <Text mb={2}>Dias de recesso: {diasDeRecesso}</Text>
+            <Text mb={2}>
+              Previsão da bolsa no recesso: R$ {previsaoBolsaRecesso}
+            </Text>
+          </Box>
+          <Flex flexDirection="column" justifyContent="center" mt={4}>
+            <Button colorScheme="green" mb={2} onClick={() => compartilharResultados()}>
+              WhatsApp
+              <Icon as={FaShareAlt} ml={2} />
+            </Button>
+            <Button colorScheme="blue" mb={2} onClick={() => window.open(`https://twitter.com/intent/tweet?text=Minha%20previsão%20da%20bolsa%20no%20recesso%20é%20de%20R$${previsaoBolsaRecesso}`)}>
+              Paul Pessoa
+              <Icon as={FaTwitter} ml={2} />
+            </Button>
+            <Button colorScheme="gray" onClick={() => window.open('https://github.com/paulpessoa/')}>
+              Paul Pessoa
+              <Icon as={FaGithub} ml={2} />
+            </Button>
+          </Flex>
         </Box>
       </Flex>
     </>
