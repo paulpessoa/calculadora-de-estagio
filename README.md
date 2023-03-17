@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://calculadora-de-estagio.vercel.app/" target="_blank">
-    <img src="./public/images/print-example.png" alt="Exemplo da calculadora de recesso">
+    <img src="./public/images/background-image.gif" alt="Exemplo da calculadora de recesso">
   </a>
 </p>
 

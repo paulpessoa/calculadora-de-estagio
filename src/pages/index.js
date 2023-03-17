@@ -107,7 +107,7 @@ export default function Home() {
               <Icon as={FaShareAlt} ml={2} />
             </Button>
             <Button colorScheme="blue" mb={2} onClick={() => window.open(`https://twitter.com/intent/tweet?text=Minha%20previsão%20da%20bolsa%20no%20recesso%20é%20de%20R$${previsaoBolsaRecesso}`)}>
-              Paul Pessoa
+              Twitter
               <Icon as={FaTwitter} ml={2} />
             </Button>
             <Button colorScheme="gray" onClick={() => window.open('https://github.com/paulpessoa/')}>
